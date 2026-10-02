@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Multi-Tracker</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f1f5f9; color: #1e293b; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); max-width: 500px; width: 100%; }
+        h2 { margin-top: 0; color: #0f172a; font-size: 24px; display: flex; align-items: center; gap: 8px; }
+        label { font-weight: 600; font-size: 14px; color: #475569; display: block; margin-bottom: 6px; }
+        select, textarea { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; margin-bottom: 16px; box-sizing: border-box; background-color: #fff; }
+        textarea { height: 140px; resize: vertical; font-family: monospace; }
+        button { background-color: #2563eb; color: white; border: none; padding: 14px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        button:hover { background-color: #1d4ed8; }
+        .note { font-size: 13px; color: #64748b; margin-top: 15px; line-height: 1.5; background: #f8fafc; padding: 10px; border-radius: 6px; border-left: 4px solid #3b82f6; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Multi-Carrier Tracker 📦</h2>
+    
+    <label for="carrier">1. Select Carrier:</label>
+    <select id="carrier">
+        <optgroup label="Global / US">
+            <option value="https://usps.com">USPS</option>
+            <option value="https://fedex.com">FedEx</option>
+            <option value="https://ups.com">UPS</option>
+            <option value="https://dhl.com">DHL Express</option>
+        </optgroup>
+        <optgroup label="India">
+            <option value="https://delhivery.com">Delhivery</option>
+            <option value="https://bluedart.com">Blue Dart</option>
+            <option value="https://indiapost.gov.in">India Post</option>
+            <option value="https://dtdc.in">DTDC</option>
+        </optgroup>
+        <optgroup label="All-in-One Aggregators (Auto-Detect)">
+            <option value="https://17track.net">17Track (Global)</option>
+            <option value="https://shiprocket.in">Shiprocket (India)</option>
+        </optgroup>
+    </select>
+
+    <label for="trackingIds">2. Enter Tracking IDs (One per line):</label>
+    <textarea id="trackingIds" placeholder="Paste tracking numbers here..."></textarea>
+
+    <button onclick="trackAll()">Track All Instantly 🚀</button>
+    
+    <div class="note">
+        <strong>⚠️ Browser Tip:</strong> If windows don't open, look at your browser's address bar. Click the <strong>"Pop-up blocked"</strong> icon and choose <strong>"Always allow pop-ups"</strong>.
+    </div>
+</div>
+
+<script>
+function trackAll() {
+    const baseUrl = document.getElementById('carrier').value;
+    const text = document.getElementById('trackingIds').value;
+    const ids = text.split('\n').map(id => id.trim()).filter(id => id.length > 0);
+    
+    if (ids.length === 0) {
+        alert('Please enter at least one tracking ID.');
+        return;
+    }
+
+    // Open each tracking link in a new tab
+    ids.forEach(id => {
+        window.open(baseUrl + encodeURIComponent(id), '_blank');
+    });
+}
+</script>
+
+</body>
+</html>
