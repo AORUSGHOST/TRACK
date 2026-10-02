@@ -25,7 +25,7 @@
     <select id="carrier">
         <optgroup label="Global / US">
             <option value="https://usps.com">USPS</option>
-            <option value="https://fedex.com">FedEx</option>
+            <option value="https://www.fedex.com/fedextrack/?trknbr=">FedEx</option>
             <option value="https://ups.com">UPS</option>
             <option value="https://dhl.com">DHL Express</option>
         </optgroup>
@@ -47,7 +47,7 @@
     <button onclick="trackAll()">Track All Instantly 🚀</button>
     
     <div class="note">
-        <strong>⚠️ Browser Tip:</strong> If windows don't open, look at your browser's address bar. Click the <strong>"Pop-up blocked"</strong> icon and choose <strong>"Always allow pop-ups"</strong>.
+        <strong>⚠️ Browser Tip:</strong> If windows don't open, click the <strong>"Pop-up blocked"</strong> icon inside your address bar and select <strong>"Always allow"</strong>.
     </div>
 </div>
 
@@ -62,7 +62,6 @@ function trackAll() {
         return;
     }
 
-    // Open each tracking link in a new tab
     ids.forEach(id => {
         window.open(baseUrl + encodeURIComponent(id), '_blank');
     });
